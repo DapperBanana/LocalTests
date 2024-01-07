@@ -1,23 +1,25 @@
 
-# Importing the required libraries
-import numpy as np
-from sklearn.linear_model import LinearRegression
+def merge_sorted_lists(list1, list2):
+    merged_list = []
+    i = j = 0
 
-# Input features (X) and target variable (y)
-X = np.array([[1, 1], [1, 2], [2, 2], [2, 3]])
-y = np.dot(X, np.array([1, 2])) + 3
+    while i < len(list1) and j < len(list2):
+        if list1[i] < list2[j]:
+            merged_list.append(list1[i])
+            i += 1
+        else:
+            merged_list.append(list2[j])
+            j += 1
 
-# Creating a linear regression model
-model = LinearRegression()
+    # Append the remaining elements in case one list is longer than the other
+    merged_list += list1[i:]
+    merged_list += list2[j:]
 
-# Training the model
-model.fit(X, y)
+    return merged_list
 
-# Printing the coefficients and intercept
-print("Coefficients:", model.coef_)
-print("Intercept:", model.intercept_)
+# Test the function
+list1 = [1, 3, 5, 7, 9]
+list2 = [2, 4, 6, 8, 10]
 
-# Predicting on new data
-new_data = np.array([[3, 3], [4, 5]])
-predictions = model.predict(new_data)
-print("Predictions:", predictions)
+merged_list = merge_sorted_lists(list1, list2)
+print(merged_list)
