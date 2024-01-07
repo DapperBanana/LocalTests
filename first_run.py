@@ -1,26 +1,25 @@
-letion(id='chatcmpl-8eDeqBQKb5nuJyrLWDfgwSjC0vbBq', choices=[Choice(finish_reason='stop', index=0, logprobs=None, message=ChatCompletionMessage(content='def prime_factors(num):
-    # Initialize an empty list to store the prime factors
-    factors = []
 
-    # Determine if the number is divisible by 2
-    while num % 2 == 0:
-        factors.append(2)
-        num = num // 2
+def is_prime(number):
+    # 1 and numbers less than 1 are not prime
+    if number <= 1:
+        return False
 
-    # Check for the remaining prime factors
-    i = 3
-    while i * i <= num:
-        while num % i == 0:
-            factors.append(i)
-            num = num // i
-        i += 2
+    # 2 is the only even prime number
+    if number == 2:
+        return True
 
-    # If the remaining number is greater than 2, it is also a prime factor
-    if num > 2:
-        factors.append(num)
+    # Check if number is divisible by any number from 2 to the square root of number
+    # If it is, then it is not prime
+    for i in range(2, int(number ** 0.5) + 1):
+        if number % i == 0:
+            return False
 
-    return factors
+    # If the loop finishes without finding any divisors, it is a prime number
+    return True
 
-# Test the function
+
 number = int(input("Enter a number: "))
-print("Prime factors of", number, "are:", prime_factors(number))', role='assistant', function_call=None, tool_calls=None))], created=1704596312, model='gpt-3.5-turbo-0613', object='chat.completion', system_fingerprint=None, usage=CompletionUsage(completion_tokens=172, prompt_tokens=21, total_tokens=193)
+if is_prime(number):
+    print(number, "is a prime number.")
+else:
+    print(number, "is not a prime number.")
