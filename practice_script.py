@@ -1,23 +1,28 @@
 
-def is_perfect_digital_invariant(num):
-    num_str = str(num)
-    length = len(num_str)
-    if length <= 1:
-        return True
+from lxml import etree
 
-    digit_sum = sum(int(digit) for digit in num_str)
-    digit_product = 1
-    for digit in num_str:
-        digit_product *= int(digit)
-
-    if digit_sum == digit_product:
+def is_valid_xml_with_dtd(xml_str):
+    try:
+        parser = etree.XMLParser(dtd_validation=True)
+        etree.fromstring(xml_str, parser)
         return True
-    else:
+    except etree.XMLSyntaxError:
         return False
 
-# Test the program
-num = int(input("Enter a number: "))
-if is_perfect_digital_invariant(num):
-    print(f"{num} is a perfect digital invariant.")
+# Example XML string with a DTD
+xml_string = '''
+<!DOCTYPE root [
+  <!ELEMENT root (child1,child2)>
+  <!ELEMENT child1 (#PCDATA)>
+  <!ELEMENT child2 (#PCDATA)>
+]>
+<root>
+  <child1>Text 1</child1>
+  <child2>Text 2</child2>
+</root>
+'''
+
+if is_valid_xml_with_dtd(xml_string):
+    print("The XML string is valid with DTD.")
 else:
-    print(f"{num} is not a perfect digital invariant.")
+    print("The XML string is not valid with DTD.")
