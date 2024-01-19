@@ -1,69 +1,45 @@
 
-import random
+class Queue:
+    def __init__(self):
+        self.queue = []
 
-class Player:
-    def __init__(self, name, position):
-        self.name = name
-        self.position = position
-        self.score = 0
+    def enqueue(self, item):
+        self.queue.append(item)
 
-    def update_score(self):
-        self.score += random.randint(1, 10)
+    def dequeue(self):
+        if self.is_empty():
+            return None
+        return self.queue.pop(0)
 
-class Team:
-    def __init__(self, name):
-        self.name = name
-        self.players = []
+    def is_empty(self):
+        return len(self.queue) == 0
 
-    def add_player(self, player):
-        self.players.append(player)
+    def size(self):
+        return len(self.queue)
 
-    def update_scores(self):
-        for player in self.players:
-            player.update_score()
+    def get_front(self):
+        if self.is_empty():
+            return None
+        return self.queue[0]
 
-    def get_total_score(self):
-        total_score = sum([player.score for player in self.players])
-        return total_score
 
-def create_players():
-    players = [
-        Player("Player 1", "Forward"),
-        Player("Player 2", "Forward"),
-        Player("Player 3", "Midfielder"),
-        Player("Player 4", "Midfielder"),
-        Player("Player 5", "Defender"),
-        Player("Player 6", "Defender"),
-        Player("Player 7", "Goalkeeper"),
-    ]
-    return players
+# Example usage
+queue = Queue()
 
-def create_teams():
-    teams = [Team("Team 1"), Team("Team 2")]
-    all_players = create_players()
-    random.shuffle(all_players)
-    for i in range(len(all_players)):
-        teams[i % 2].add_player(all_players[i])
-    return teams
+# Enqueue elements
+queue.enqueue('apple')
+queue.enqueue('banana')
+queue.enqueue('cherry')
 
-def main():
-    teams = create_teams()
+# Print queue size
+print("Size:", queue.size())  # Output: 3
 
-    for team in teams:
-        print(f"Team: {team.name}")
-        for player in team.players:
-            print(f"Player: {player.name} - Position: {player.position}")
-        print()
+# Dequeue elements
+print(queue.dequeue())  # Output: apple
+print(queue.dequeue())  # Output: banana
 
-    input("Press enter to start the match...")
+# Print queue size after dequeuing
+print("Size:", queue.size())  # Output: 1
 
-    for _ in range(90):
-        for team in teams:
-            team.update_scores()
-
-    print("Match ended!")
-    for team in teams:
-        print(f"Team: {team.name} - Total Score: {team.get_total_score()}")
-
-if __name__ == "__main__":
-    main()
+# Get the front element
+print("Front:", queue.get_front())  # Output: cherry
