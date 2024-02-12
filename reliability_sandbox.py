@@ -1,11 +1,25 @@
-letion(id='chatcmpl-8rFkoVhNahxBZZYtyQOKaJWApV94C', choices=[Choice(finish_reason='stop', index=0, logprobs=None, message=ChatCompletionMessage(content='import math
 
-def calculate_cone_volume(radius, height):
-    volume = (1/3) * math.pi * radius**2 * height
-    return volume
+def is_isogram(word):
+    # Convert the word to lowercase
+    word = word.lower()
+    
+    # Create an empty set to store the unique letters
+    unique_letters = set()
+    
+    # Iterate over each letter in the word
+    for letter in word:
+        # If the letter is already in the unique_letters set, the word is not an isogram
+        if letter in unique_letters:
+            return False
+        # Otherwise, add the letter to the set
+        else:
+            unique_letters.add(letter)
+    
+    # If all letters are unique, the word is an isogram
+    return True
 
-radius = float(input("Enter the radius of the cone: "))
-height = float(input("Enter the height of the cone: "))
-
-cone_volume = calculate_cone_volume(radius, height)
-print("The volume of the cone is:", cone_volume)', role='assistant', function_call=None, tool_calls=None))], created=1707702634, model='gpt-3.5-turbo-0613', object='chat.completion', system_fingerprint=None, usage=CompletionUsage(completion_tokens=84, prompt_tokens=24, total_tokens=108)
+# Test the function with some examples
+print(is_isogram("hello"))  # False
+print(is_isogram("python"))  # True
+print(is_isogram("world"))  # False
+print(is_isogram("programming"))  # False
