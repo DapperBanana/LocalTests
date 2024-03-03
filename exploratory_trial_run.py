@@ -1,26 +1,42 @@
 
-def is_vampire_number(num):
-    num_str = str(num)
-    num_len = len(num_str)
+def solve_maze(maze, start, end):
+    visited = []
+    stack = [start]
 
-    if num_len % 2 != 0:
-        return False
+    while stack:
+        current = stack.pop()
 
-    num_digits = [int(d) for d in num_str]
-    num_digits.sort()
+        if current == end:
+            return True
 
-    for i in range(10**(num_len//2), int(num**0.5)+1):
-        if num % i == 0:
-            factors = [int(d) for d in str(i) + str(num // i)]
-            factors.sort()
-            if factors == num_digits:
-                return True
+        if current in visited:
+            continue
+
+        visited.append(current)
+
+        row, col = current
+
+        # Try moving in all four directions
+        directions = [(0, -1), (0, 1), (-1, 0), (1, 0)]
+        for d in directions:
+            new_row, new_col = row + d[0], col + d[1]
+            if 0 <= new_row < len(maze) and 0 <= new_col < len(maze[0]) and maze[new_row][new_col] != '#':
+                stack.append((new_row, new_col))
 
     return False
 
-# Test the function
-num = 1260
-if is_vampire_number(num):
-    print(f"{num} is a vampire number.")
+# Test the algorithm with a example maze
+maze = [
+    ['S', '#', '#', '#', 'E'],
+    [' ', ' ', ' ', '#', ' '],
+    ['#', '#', ' ', '#', ' '],
+    [' ', ' ', ' ', ' ', ' '],
+]
+
+start = (0, 0)
+end = (0, 4)
+
+if solve_maze(maze, start, end):
+    print("Maze is solvable!")
 else:
-    print(f"{num} is not a vampire number.")
+    print("Maze is not solvable.")
