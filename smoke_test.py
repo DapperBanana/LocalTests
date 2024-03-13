@@ -1,8 +1,20 @@
-letion(id='chatcmpl-927KAYv5lv3JOYKayNV1BoMjax48B', choices=[Choice(finish_reason='stop', index=0, logprobs=None, message=ChatCompletionMessage(content='import math
 
-def area_of_regular_hexagon(side_length):
-    return (3 * math.sqrt(3) * side_length ** 2) / 2
+def hamming_distance(str1, str2):
+    if len(str1) != len(str2):
+        raise ValueError("Strings must be of equal length")
+    
+    distance = 0
+    for char1, char2 in zip(str1, str2):
+        if char1 != char2:
+            distance += 1
+    
+    return distance
 
-side_length = float(input("Enter the side length of the regular hexagon: "))
-area = area_of_regular_hexagon(side_length)
-print(f"The area of the regular hexagon with side length {side_length} is {area}")', role='assistant', function_call=None, tool_calls=None))], created=1710291838, model='gpt-3.5-turbo-0125', object='chat.completion', system_fingerprint='fp_4f0b692a78', usage=CompletionUsage(completion_tokens=80, prompt_tokens=21, total_tokens=101)
+# Test the function
+string1 = "karolin"
+string2 = "kathrin"
+print(f"The Hamming distance between '{string1}' and '{string2}' is {hamming_distance(string1, string2)}")
+
+string3 = "1011101"
+string4 = "1001001"
+print(f"The Hamming distance between '{string3}' and '{string4}' is {hamming_distance(string3, string4)}")
