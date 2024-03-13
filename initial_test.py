@@ -1,0 +1,7 @@
+letion(id='chatcmpl-92QcHdk3UY43tuStpi9wkayyUBqih', choices=[Choice(finish_reason='stop', index=0, logprobs=None, message=ChatCompletionMessage(content='def calculate_surface_area(side_length):
+    surface_area = 6 * (side_length ** 2)
+    return surface_area
+
+side_length = float(input("Enter the side length of the cube: "))
+surface_area = calculate_surface_area(side_length)
+print(f"The surface area of the cube is {surface_area}")', role='assistant', function_call=None, tool_calls=None))], created=1710365997, model='gpt-3.5-turbo-0125', object='chat.completion', system_fingerprint='fp_4f0b692a78', usage=CompletionUsage(completion_tokens=63, prompt_tokens=20, total_tokens=83)
