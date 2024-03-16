@@ -1,1 +1,0 @@
-letion(id='chatcmpl-92mvKOmRUuE9bu23jDbED9R3E05he', choices=[Choice(finish_reason='stop', index=0, logprobs=None, message=ChatCompletionMessage(content='
