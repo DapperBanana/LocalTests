@@ -1,16 +1,24 @@
 
-def find_replace(file_name, word_to_replace, replacement_word):
-    with open(file_name, 'r') as file:
-        file_content = file.read()
+def is_vampire_number(n):
+    n_str = str(n)
+    
+    # Check if number of digits is even
+    if len(n_str) % 2 != 0:
+        return False
 
-    new_content = file_content.replace(word_to_replace, replacement_word)
+    # Check all possible combinations of two factors
+    for i in range(10**(len(n_str)//2)):
+        for j in range(10**(len(n_str)//2)):
+            if i * j == n:
+                factor_str = str(i) + str(j)
+                if ''.join(sorted(factor_str)) == ''.join(sorted(n_str)):
+                    return True
 
-    with open(file_name, 'w') as file:
-        file.write(new_content)
+    return False
 
-file_name = 'sample_text.txt'
-word_to_replace = 'old_word'
-replacement_word = 'new_word'
-
-find_replace(file_name, word_to_replace, replacement_word)
-print(f'{word_to_replace} replaced with {replacement_word} in {file_name}')
+# Test the program
+num = 1260
+if is_vampire_number(num):
+    print(f"{num} is a vampire number")
+else:
+    print(f"{num} is not a vampire number")
