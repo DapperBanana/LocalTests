@@ -1,30 +1,23 @@
 
-def add_matrices(matrix1, matrix2):
-    result = [[matrix1[i][j] + matrix2[i][j] for j in range(len(matrix1[0]))] for i in range(len(matrix1))]
+def matrix_multiplication(matrix1, matrix2):
+    result = [[0 for _ in range(len(matrix2[0]))] for _ in range(len(matrix1))]
+    
+    for i in range(len(matrix1)):
+        for j in range(len(matrix2[0])):
+            for k in range(len(matrix2)):
+                result[i][j] += matrix1[i][k] * matrix2[k][j]
+    
     return result
-
-def sub_matrices(matrix1, matrix2):
-    result = [[matrix1[i][j] - matrix2[i][j] for j in range(len(matrix1[0]))] for i in range(len(matrix1))]
-    return result
-
-def print_matrix(matrix):
-    for row in matrix:
-        print(row)
 
 # Example matrices
-matrix1 = [[1, 2, 3], [4, 5, 6]]
-matrix2 = [[7, 8, 9], [10, 11, 12]]
+matrix1 = [[1, 2, 3],
+           [4, 5, 6]]
 
-print("Matrix 1:")
-print_matrix(matrix1)
+matrix2 = [[7, 8],
+           [9, 10],
+           [11, 12]]
 
-print("\nMatrix 2:")
-print_matrix(matrix2)
+result = matrix_multiplication(matrix1, matrix2)
 
-addition_result = add_matrices(matrix1, matrix2)
-print("\nAddition Result:")
-print_matrix(addition_result)
-
-subtraction_result = sub_matrices(matrix1, matrix2)
-print("\nSubtraction Result:")
-print_matrix(subtraction_result)
+for row in result:
+    print(row)
