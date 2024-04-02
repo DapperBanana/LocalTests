@@ -1,36 +1,31 @@
 
-# Sample content-based recommendation system in Python
+import random
 
-# Dummy data of movies and their genres
-movies = {
-    'Movie 1': ['Action', 'Adventure'],
-    'Movie 2': ['Drama'],
-    'Movie 3': ['Comedy', 'Romance'],
-    'Movie 4': ['Action', 'Drama'],
-    'Movie 5': ['Comedy']
-}
+# list of possible user inputs
+greetings = ['hello', 'hi', 'hey', 'yo', 'hi there', 'howdy']
+goodbyes = ['goodbye', 'bye', 'see ya', 'adios', 'bye bye']
+questions = ['how are you?', 'what is your name?', 'what can you do?', 'tell me a joke']
 
-# Function to get recommendations based on user input
-def get_recommendations(user_input):
-    recommendations = []
+# list of possible chatbot responses
+hello_responses = ['Hello!', 'Hi there!', 'Hey!', 'Yo!', 'Howdy!']
+goodbye_responses = ['Goodbye!', 'Bye!', 'See you later!', 'Adios!', 'Bye bye!']
+questions_responses = ['I am a chatbot.', 'My name is Chatbot.', 'I can chat with you and tell jokes.', 'Why was six afraid of seven? Because seven eight (ate) nine!']
+
+def chatbot():
+    print("Welcome to the chatbot!")
     
-    for movie in movies:
-        if set(user_input).intersection(movies[movie]):
-            recommendations.append(movie)
-    
-    return recommendations
-
-# Getting user input
-user_input = input("Enter your preferred genres separated by comma (e.g. Action,Comedy): ")
-user_input = user_input.split(',')
-
-# Getting recommendations
-recommendations = get_recommendations(user_input)
-
-# Displaying recommendations
-if recommendations:
-    print("Recommended movies based on your input:\n")
-    for movie in recommendations:
-        print(movie)
-else:
-    print("No recommendations found. Please try different genres.")
+    while True:
+        user_input = input("You: ").lower()  # convert user input to lowercase
+        
+        if user_input in greetings:
+            print(random.choice(hello_responses))
+        elif user_input in goodbyes:
+            print(random.choice(goodbye_responses))
+            break
+        elif user_input in questions:
+            print(random.choice(questions_responses))
+        else:
+            print("I'm sorry, I don't understand that.")
+            
+if __name__ == '__main__':
+    chatbot()
