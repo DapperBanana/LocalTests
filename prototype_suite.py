@@ -1,33 +1,47 @@
 
-def encrypt(text, shift):
-    encrypted_text = ""
-    for char in text:
-        if char.isalpha():
-            if char.islower():
-                encrypted_text += chr((ord(char) - ord('a') + shift) % 26 + ord('a'))
-            else:
-                encrypted_text += chr((ord(char) - ord('A') + shift) % 26 + ord('A'))
-        else:
-            encrypted_text += char
-    return encrypted_text
+def is_valid_sudoku(board):
+    # Check rows
+    for row in board:
+        if not is_valid_list(row):
+            return False
+    
+    # Check columns
+    for i in range(9):
+        column = [board[j][i] for j in range(9)]
+        if not is_valid_list(column):
+            return False
+    
+    # Check 3x3 grids
+    for i in range(0, 9, 3):
+        for j in range(0, 9, 3):
+            grid = [board[x][y] for x in range(i, i+3) for y in range(j, j+3)]
+            if not is_valid_list(grid):
+                return False
+    
+    return True
 
-def decrypt(text, shift):
-    decrypted_text = ""
-    for char in text:
-        if char.isalpha():
-            if char.islower():
-                decrypted_text += chr((ord(char) - ord('a') - shift) % 26 + ord('a'))
-            else:
-                decrypted_text += chr((ord(char) - ord('A') - shift) % 26 + ord('A'))
-        else:
-            decrypted_text += char
-    return decrypted_text
+def is_valid_list(nums):
+    seen = set()
+    for num in nums:
+        if num != '.' and num in seen:
+            return False
+        seen.add(num)
+    return True
 
-text = input("Enter the text to encrypt/decrypt: ")
-shift = int(input("Enter the shift value: "))
+# Example Sudoku board
+board = [
+    ["5","3",".",".","7",".",".",".","."],
+    ["6",".",".","1","9","5",".",".","."],
+    [".","9","8",".",".",".",".","6","."],
+    ["8",".",".",".","6",".",".",".","3"],
+    ["4",".",".","8",".","3",".",".","1"],
+    ["7",".",".",".","2",".",".",".","6"],
+    [".","6",".",".",".",".","2","8","."],
+    [".",".",".","4","1","9",".",".","5"],
+    [".",".",".",".","8",".",".","7","9"]
+]
 
-encrypted_text = encrypt(text, shift)
-decrypted_text = decrypt(encrypted_text, shift)
-
-print("Encrypted text:", encrypted_text)
-print("Decrypted text:", decrypted_text)
+if is_valid_sudoku(board):
+    print("Valid Sudoku Solution")
+else:
+    print("Invalid Sudoku Solution")
