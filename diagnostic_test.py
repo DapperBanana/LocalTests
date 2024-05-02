@@ -1,16 +1,14 @@
-letion(id='chatcmpl-9KYyFzrupxV00pqXWd8NyULgv19yu', choices=[Choice(finish_reason='stop', index=0, logprobs=None, message=ChatCompletionMessage(content='# Function to calculate the median of a list of numbers
-def calculate_median(numbers):
-    numbers.sort() # Sort the list of numbers
+letion(id='chatcmpl-9KZ78RzLaEHlpqdEQEPjmBgr8RRr6', choices=[Choice(finish_reason='stop', index=0, logprobs=None, message=ChatCompletionMessage(content='def area_of_pentagon(side_length):
+    import math
     
-    n = len(numbers)
-    if n % 2 == 0:
-        # If the list has an even number of elements, return the average of the middle two elements
-        return (numbers[n//2 - 1] + numbers[n//2]) / 2
-    else:
-        # If the list has an odd number of elements, return the middle element
-        return numbers[n//2]
+    # Calculate the apothem of the pentagon
+    apothem = side_length / (2 * math.tan(math.pi / 5))
+    
+    # Calculate the area of the pentagon
+    area = (5 / 2) * side_length * apothem
+    
+    return area
 
-# Test the function with a list of numbers
-numbers = [3, 5, 7, 2, 8, 6, 4]
-median = calculate_median(numbers)
-print("The median of the list is:", median)', role='assistant', function_call=None, tool_calls=None))], created=1714688015, model='gpt-3.5-turbo-0125', object='chat.completion', system_fingerprint='fp_a450710239', usage=CompletionUsage(completion_tokens=163, prompt_tokens=21, total_tokens=184)
+side_length = float(input("Enter the side length of the pentagon: "))
+pentagon_area = area_of_pentagon(side_length)
+print("The area of the pentagon is: ", pentagon_area)', role='assistant', function_call=None, tool_calls=None))], created=1714688566, model='gpt-3.5-turbo-0125', object='chat.completion', system_fingerprint='fp_3b956da36b', usage=CompletionUsage(completion_tokens=120, prompt_tokens=20, total_tokens=140)
