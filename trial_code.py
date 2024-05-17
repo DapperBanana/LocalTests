@@ -1,16 +1,16 @@
 
-def hamming_distance(str1, str2):
-    if len(str1) != len(str2):
-        raise ValueError("The strings must have the same length")
-    
-    distance = 0
-    for char1, char2 in zip(str1, str2):
-        if char1 != char2:
-            distance += 1
-    
-    return distance
+import matplotlib.pyplot as plt
 
-# Test the function
-str1 = "karolin"
-str2 = "kathrin"
-print(f"The Hamming distance between '{str1}' and '{str2}' is {hamming_distance(str1, str2)}")
+def generate_bar_chart(data):
+    keys = list(data.keys())
+    values = list(data.values())
+    
+    plt.bar(keys, values)
+    plt.xlabel('Categories')
+    plt.ylabel('Values')
+    plt.title('Bar Chart')
+    plt.show()
+
+data = {'A': 10, 'B': 20, 'C': 15, 'D': 25}
+
+generate_bar_chart(data)
