@@ -1,33 +1,56 @@
 
-class JobApplicationSystem:
-    def __init__(self):
-        self.applicants = []
+class Stock:
+    def __init__(self, symbol, price):
+        self.symbol = symbol
+        self.price = price
+        self.shares = 0
 
-    def apply_for_job(self, name, resume):
-        self.applicants.append({"name": name, "resume": resume})
-        print(f"Thank you {name} for applying for the job. Your application has been received.")
-
-    def review_applications(self):
-        print("List of applicants:")
-        for idx, applicant in enumerate(self.applicants, 1):
-            print(f"{idx}. {applicant['name']}")
-
-    def select_candidate(self, idx):
-        if idx < 1 or idx > len(self.applicants):
-            print("Invalid candidate selection")
+    def buy(self, num_shares):
+        self.shares += num_shares
+        
+    def sell(self, num_shares):
+        if num_shares <= self.shares:
+            self.shares -= num_shares
+            return True
         else:
-            selected_candidate = self.applicants[idx - 1]
-            print(f"{selected_candidate['name']} has been selected for the job.")
-            del self.applicants[idx - 1]
+            return False
 
-# Sample usage
-job_app_system = JobApplicationSystem()
+    def get_value(self):
+        return self.price * self.shares
 
-job_app_system.apply_for_job("Alice", "Experienced software engineer")
-job_app_system.apply_for_job("Bob", "Fresh graduate with strong programming skills")
+def main():
+    stock = Stock("AAPL", 150.00)
+    
+    while True:
+        print("\nStock Trading System")
+        print("1. Buy Stock")
+        print("2. Sell Stock")
+        print("3. Check Portfolio")
+        print("4. Quit")
+        
+        choice = input("Enter your choice: ")
+        
+        if choice == "1":
+            num_shares = int(input("Enter the number of shares to buy: "))
+            stock.buy(num_shares)
+            print(f"Bought {num_shares} shares of {stock.symbol} at ${stock.price} each.")
+            
+        elif choice == "2":
+            num_shares = int(input("Enter the number of shares to sell: "))
+            if stock.sell(num_shares):
+                print(f"Sold {num_shares} shares of {stock.symbol} at ${stock.price} each.")
+            else:
+                print("Not enough shares to sell.")
+                
+        elif choice == "3":
+            print(f"Portfolio Value: ${stock.get_value()}")
+            
+        elif choice == "4":
+            print("Exiting program...")
+            break
+        
+        else:
+            print("Invalid choice. Please try again.")
 
-job_app_system.review_applications()
-
-job_app_system.select_candidate(1)
-
-job_app_system.review_applications()
+if __name__ == "__main__":
+    main()
