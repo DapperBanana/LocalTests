@@ -1,11 +1,11 @@
-letion(id='chatcmpl-9bBmCUGBpC9l2L9gv3dHOPlZcEQIf', choices=[Choice(finish_reason='stop', index=0, logprobs=None, message=ChatCompletionMessage(content='import random
-import string
 
-def generate_password(length):
-    password = ""
-    for i in range(length):
-        password += random.choice(string.ascii_letters + string.digits + string.punctuation)
-    return password
+def trapezoid_area(base1, base2, height):
+    area = 0.5 * (base1 + base2) * height
+    return area
 
-length = int(input("Enter the length of the password: "))
-print("Generated Password:", generate_password(length))', role='assistant', function_call=None, tool_calls=None))], created=1718650432, model='gpt-3.5-turbo-0125', object='chat.completion', system_fingerprint=None, usage=CompletionUsage(completion_tokens=65, prompt_tokens=21, total_tokens=86)
+base1 = float(input("Enter the length of the first base of the trapezoid: "))
+base2 = float(input("Enter the length of the second base of the trapezoid: "))
+height = float(input("Enter the height of the trapezoid: "))
+
+area = trapezoid_area(base1, base2, height)
+print(f"The area of the trapezoid is: {area}")
