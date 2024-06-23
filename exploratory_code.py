@@ -1,0 +1,1 @@
+letion(id='chatcmpl-9dMbYAQQwCcJiRW4YttACXgpClRl1', choices=[Choice(finish_reason='stop', index=0, logprobs=None, message=ChatCompletionMessage(content='
