@@ -1,14 +1,23 @@
 
-import librosa
+def gcd(a, b):
+    while b:
+        a, b = b, a % b
+    return a
 
-# Load the audio file
-audio_file = 'path_to_your_audio_file.wav'
-y, sr = librosa.load(audio_file)
+def lcm(a, b):
+    return a * b // gcd(a, b)
 
-# Extract the pitch
-pitch, _ = librosa.piptrack(y=y, sr=sr)
+def calculate_lcm(numbers):
+    result = 1
+    for number in numbers:
+        result = lcm(result, number)
+    return result
 
-# Get the mean pitch over time
-mean_pitch = librosa.hz_to_midi(pitch.mean())
+# Input list of numbers
+numbers = [15, 20, 30, 45]
 
-print("Mean pitch: {:.2f} MIDI".format(mean_pitch))
+# Calculate LCM
+lcm_result = calculate_lcm(numbers)
+
+# Output
+print(f"The LCM of the numbers {numbers} is: {lcm_result}")
