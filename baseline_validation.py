@@ -1,24 +1,37 @@
 
-def edit_distance(str1, str2):
-    len_str1 = len(str1)
-    len_str2 = len(str2)
-    
-    dp = [[0 for _ in range(len_str2+1)] for _ in range(len_str1+1)]
-    
-    for i in range(len_str1+1):
-        for j in range(len_str2+1):
-            if i == 0:
-                dp[i][j] = j
-            elif j == 0:
-                dp[i][j] = i
-            elif str1[i-1] == str2[j-1]:
-                dp[i][j] = dp[i-1][j-1]
-            else:
-                dp[i][j] = 1 + min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1])
-    
-    return dp[len_str1][len_str2]
+def is_symmetric(matrix):
+    # Check if the matrix is square
+    if len(matrix) != len(matrix[0]):
+        return False
 
-# Test the program
-str1 = "kitten"
-str2 = "sitting"
-print("Edit distance between '{}' and '{}' is: {}".format(str1, str2, edit_distance(str1, str2)))
+    n = len(matrix)
+    
+    # Check if the matrix is symmetric
+    for i in range(n):
+        for j in range(n):
+            if matrix[i][j] != matrix[j][i]:
+                return False
+    return True
+
+# Test the function
+matrix1 = [
+    [1, 2, 3],
+    [2, 4, 5],
+    [3, 5, 6]
+]
+
+matrix2 = [
+    [1, 2, 3],
+    [2, 4, 5],
+    [2, 5, 6]
+]
+
+if is_symmetric(matrix1):
+    print("Matrix 1 is symmetric")
+else:
+    print("Matrix 1 is not symmetric")
+
+if is_symmetric(matrix2):
+    print("Matrix 2 is symmetric")
+else:
+    print("Matrix 2 is not symmetric")
