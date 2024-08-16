@@ -1,13 +1,24 @@
 
-def is_leap_year(year):
-    if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
-        return True
-    else:
-        return False
+def is_isogram(string):
+    # Convert the string to lowercase to ignore case
+    string = string.lower()
+    
+    # Create an empty set to store unique characters
+    char_set = set()
+    
+    for char in string:
+        # Check if the character is a letter
+        if char.isalpha():
+            # If the character is already in the set, return False
+            if char in char_set:
+                return False
+            # Otherwise, add the character to the set
+            char_set.add(char)
+    
+    # If loop completes, return True
+    return True
 
-year = int(input("Enter a year: "))
-
-if is_leap_year(year):
-    print(f"{year} is a leap year.")
-else:
-    print(f"{year} is not a leap year.")
+# Test the function with some examples
+print(is_isogram("hello"))  # False
+print(is_isogram("python"))  # True
+print(is_isogram("World"))  # True
