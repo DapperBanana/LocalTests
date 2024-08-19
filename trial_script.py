@@ -1,10 +1,13 @@
 
-def is_palindrome_year(year):
-    year_str = str(year)
-    return year_str == year_str[::-1]
+def intersection(lst1, lst2):
+    return list(set(lst1) & set(lst2))
 
-year = int(input("Enter a year: "))
-if is_palindrome_year(year):
-    print(f"{year} is a palindrome year.")
-else:
-    print(f"{year} is not a palindrome year.")
+# Input lists
+list1 = [1, 2, 3, 4, 5]
+list2 = [4, 5, 6, 7, 8]
+
+# Finding intersection
+result = intersection(list1, list2)
+
+# Printing the intersection
+print("Intersection of the two lists is:", result)
