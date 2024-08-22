@@ -1,21 +1,22 @@
 
-import csv
 import matplotlib.pyplot as plt
+import numpy as np
 
-# Read data from CSV file
-data = []
-with open('data.csv', 'r') as file:
-    reader = csv.reader(file)
-    for row in reader:
-        data.append(row)
+# Set seed for reproducibility
+np.random.seed(0)
 
-# Extract x and y values from data
-x = [row[0] for row in data]
-y = [int(row[1]) for row in data]
+# Number of steps in the random walk
+n_steps = 1000
 
-# Plot bar chart
-plt.bar(x, y)
-plt.xlabel('Category')
-plt.ylabel('Value')
-plt.title('Bar Chart from CSV Data')
+# Generate random steps (either -1 or 1)
+steps = np.random.choice([-1, 1], size=n_steps)
+
+# Calculate the random walk
+walk = np.cumsum(steps)
+
+# Plot the random walk
+plt.plot(np.arange(n_steps), walk)
+plt.title('Random Walk Plot')
+plt.xlabel('Steps')
+plt.ylabel('Position')
 plt.show()
