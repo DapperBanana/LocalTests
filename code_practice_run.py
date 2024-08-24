@@ -1,13 +1,41 @@
 
-def find_common_elements(list1, list2):
-    common_elements = []
-    for element in list1:
-        if element in list2 and element not in common_elements:
-            common_elements.append(element)
-    return common_elements
+def solve_maze(maze, start, end):
+    stack = [(start, [start])]
+    while stack:
+        (x, y), path = stack.pop()
+        if (x, y) == end:
+            return path
+        for nx, ny in [(x+1, y), (x-1, y), (x, y+1), (x, y-1)]:
+            if 0 <= nx < len(maze) and 0 <= ny < len(maze[0]) and maze[nx][ny] != '#' and (nx, ny) not in path:
+                stack.append(((nx, ny), path + [(nx, ny)])
+    return None
 
-list1 = [1, 2, 3, 4, 5]
-list2 = [4, 5, 6, 7, 8]
+# Define the maze as a 2D list
+maze = [
+    list("##########"),
+    list("#S   #   #"),
+    list("#    # # #"),
+    list("#  # #   #"),
+    list("#    #   #"),
+    list("# # #    #"),
+    list("# #      #"),
+    list("######## #"),
+    list("#   #    #"),
+    list("#   #    #"),
+    list("#   #    #"),
+    list("#      E#"),
+    list("##########")
+]
 
-common_elements = find_common_elements(list1, list2)
-print("Common elements between list1 and list2:", common_elements)
+start = (1, 1)  # Starting position
+end = (11, 9)  # Ending position
+
+path = solve_maze(maze, start, end)
+
+if path:
+    for x, y in path:
+        maze[x][y] = 'X'
+    for row in maze:
+        print(''.join(row))
+else:
+    print("No path found!")
