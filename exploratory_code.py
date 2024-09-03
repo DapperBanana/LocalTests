@@ -1,14 +1,23 @@
 
-def find_common_elements(list1, list2):
-    common_elements = []
-    for element in list1:
-        if element in list2 and element not in common_elements:
-            common_elements.append(element)
+import cmath
+
+# function to find the roots of a quadratic equation
+def find_roots(a, b, c):
+    discriminant = (b ** 2) - (4 * a * c)
     
-    return common_elements
+    # calculate the roots
+    root1 = (-b + cmath.sqrt(discriminant)) / (2 * a)
+    root2 = (-b - cmath.sqrt(discriminant)) / (2 * a)
+    
+    return root1, root2
 
-list1 = [1, 2, 3, 4, 5]
-list2 = [3, 4, 5, 6, 7]
+# input coefficients of the quadratic equation
+a = float(input("Enter the coefficient of x^2: "))
+b = float(input("Enter the coefficient of x: "))
+c = float(input("Enter the constant term: "))
 
-common_elements = find_common_elements(list1, list2)
-print(f"Common elements between list1 and list2: {common_elements}")
+# find the roots
+root1, root2 = find_roots(a, b, c)
+
+# display the roots
+print(f'The roots of the quadratic equation are: {root1} and {root2}')
