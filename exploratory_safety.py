@@ -1,41 +1,33 @@
 
-class Inventory:
-    def __init__(self):
-        self.inventory = {}
+def expand_around_center(s, left, right):
+    while left >= 0 and right < len(s) and s[left] == s[right]:
+        left -= 1
+        right += 1
+    return s[left+1:right]
 
-    def add_item(self, item_name, quantity):
-        if item_name in self.inventory:
-            self.inventory[item_name] += quantity
-        else:
-            self.inventory[item_name] = quantity
+def longest_palindromic_substring(s):
+    if len(s) == 0:
+        return ""
+    
+    longest = ""
+    for i in range(len(s)):
+        # Odd length palindromes
+        palindrome1 = expand_around_center(s, i, i)
+        
+        if len(palindrome1) > len(longest):
+            longest = palindrome1
+        
+        # Even length palindromes
+        palindrome2 = expand_around_center(s, i, i+1)
+        
+        if len(palindrome2) > len(longest):
+            longest = palindrome2
+    
+    return longest
 
-    def remove_item(self, item_name, quantity):
-        if item_name in self.inventory:
-            if self.inventory[item_name] >= quantity:
-                self.inventory[item_name] -= quantity
-            else:
-                print(f"Not enough {item_name} in inventory")
-        else:
-            print(f"{item_name} not found in inventory")
+# Test the function
+s = "babad"
+print(longest_palindromic_substring(s))  # Output: "aba"
 
-    def display_inventory(self):
-        print("Inventory:")
-        for item_name, quantity in self.inventory.items():
-            print(f"{item_name}: {quantity}")
-
-# Create an instance of Inventory class
-inventory = Inventory()
-
-# Add items to inventory
-inventory.add_item("Apple", 10)
-inventory.add_item("Banana", 5)
-
-# Display inventory
-inventory.display_inventory()
-
-# Remove items from inventory
-inventory.remove_item("Apple", 3)
-inventory.remove_item("Orange", 2)
-
-# Display inventory again
-inventory.display_inventory()
+s = "cbbd"
+print(longest_palindromic_substring(s))  # Output: "bb"
