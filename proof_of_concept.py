@@ -1,39 +1,25 @@
 
-class Stack:
-    def __init__(self):
-        self.stack = []
+def int_to_roman(num):
+    val = [
+        1000, 900, 500, 400,
+        100, 90, 50, 40,
+        10, 9, 5, 4,
+        1
+        ]
+    syms = [
+        "M", "CM", "D", "CD",
+        "C", "XC", "L", "XL",
+        "X", "IX", "V", "IV",
+        "I"
+        ]
+    roman_num = ''
+    i = 0
+    while num > 0:
+        for _ in range(num // val[i]):
+            roman_num += syms[i]
+            num -= val[i]
+        i += 1
+    return roman_num
 
-    def push(self, value):
-        self.stack.append(value)
-
-    def pop(self):
-        if not self.is_empty():
-            return self.stack.pop()
-        else:
-            return "Stack is empty."
-
-    def peek(self):
-        if not self.is_empty():
-            return self.stack[-1]
-        else:
-            return "Stack is empty."
-
-    def is_empty(self):
-        return len(self.stack) == 0
-
-# Testing the Stack implementation
-stack = Stack()
-
-print(stack.is_empty())  # True
-
-stack.push(1)
-stack.push(2)
-stack.push(3)
-
-print(stack.peek())  # 3
-
-print(stack.pop())  # 3
-print(stack.pop())  # 2
-print(stack.pop())  # 1
-
-print(stack.is_empty())  # True
+num = int(input("Enter a number: "))
+print(f"Roman numeral: {int_to_roman(num)}")
