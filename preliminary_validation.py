@@ -1,17 +1,17 @@
 
-from scapy.all import *
+def find_and_replace(file_name, word_to_find, word_to_replace):
+    with open(file_name, 'r') as file:
+        file_data = file.read()
 
-def analyze_packet(packet):
-    if IP in packet:
-        print("IP Packet: {}".format(packet[IP].src))
-    elif TCP in packet:
-        print("TCP Packet: Source Port - {}, Destination Port - {}".format(packet[TCP].sport, packet[TCP].dport))
-    elif UDP in packet:
-        print("UDP Packet: Source Port - {}, Destination Port - {}".format(packet[UDP].sport, packet[UDP].dport))
-    else:
-        print("Unknown Packet Type")
+    new_file_data = file_data.replace(word_to_find, word_to_replace)
+    
+    with open(file_name, 'w') as file:
+        file.write(new_file_data)
 
-def packet_callback(packet):
-    analyze_packet(packet)
+    print(f"Word '{word_to_find}' replaced with '{word_to_replace}' in {file_name}")
 
-sniff(prn=packet_callback, count=10)
+file_name = "example.txt"
+word_to_find = "old_word"
+word_to_replace = "new_word"
+
+find_and_replace(file_name, word_to_find, word_to_replace)
