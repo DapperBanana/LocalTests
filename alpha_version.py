@@ -1,38 +1,46 @@
 
-def is_magic_square(matrix):
-    n = len(matrix)
-    
-    # Calculate the sum of the first row
-    target_sum = sum(matrix[0])
-    
-    # Check if all rows have the same sum
-    for row in matrix:
-        if sum(row) != target_sum:
-            return False
-    
-    # Check if all columns have the same sum
-    for i in range(n):
-        col_sum = sum(matrix[j][i] for j in range(n))
-        if col_sum != target_sum:
-            return False
-            
-    # Check if the sum of the diagonals are the same
-    main_diag_sum = sum(matrix[i][i] for i in range(n))
-    anti_diag_sum = sum(matrix[i][n-i-1] for i in range(n))
-    
-    if main_diag_sum != target_sum or anti_diag_sum != target_sum:
-        return False
-        
-    return True
+import random
 
-# Example matrix
-matrix = [
-    [2, 7, 6],
-    [9, 5, 1],
-    [4, 3, 8]
-]
+# set initial values
+fuel = 100
+credits = 0
+current_planet = "Earth"
+planets = ["Mercury", "Venus", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"]
+prices = {"Mercury": 10, "Venus": 20, "Mars": 30, "Jupiter": 40, "Saturn": 50, "Uranus": 60, "Neptune": 70}
 
-if is_magic_square(matrix):
-    print("The matrix is a magic square")
-else:
-    print("The matrix is not a magic square")
+# main game loop
+while True:
+    print(f"\nYou are currently on {current_planet}. Fuel: {fuel}, Credits: {credits}")
+
+    # check if out of fuel
+    if fuel <= 0:
+        print("You ran out of fuel! Game over.")
+        break
+
+    # ask player for next action
+    action = input("Do you want to refuel, travel to a new planet, or quit? ").lower()
+
+    if action == "refuel":
+        fuel += 50
+        credits -= 10
+        print("You refueled your spaceship and paid 10 credits.")
+    
+    elif action == "travel":
+        new_planet = random.choice(planets)
+        distance = abs(planets.index(new_planet) - planets.index(current_planet))
+
+        fuel_needed = distance * 10
+        if fuel >= fuel_needed:
+            fuel -= fuel_needed
+            credits += prices[new_planet]
+            current_planet = new_planet
+            print(f"You traveled to {new_planet} and earned {prices[new_planet]} credits.")
+        else:
+            print("You don't have enough fuel to travel to a new planet.")
+    
+    elif action == "quit":
+        print("Thanks for playing! Goodbye.")
+        break
+    
+    else:
+        print("Invalid input. Please try again.")
