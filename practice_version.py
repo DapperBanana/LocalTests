@@ -1,52 +1,38 @@
 
-import random
+class Player:
+    def __init__(self, name, position, team, points):
+        self.name = name
+        self.position = position
+        self.team = team
+        self.points = points
 
-player = {
-    "name": "Player",
-    "health": 100,
-    "attack": 10,
-    "heal": 20
-}
+    def __str__(self):
+        return f"{self.name} - {self.position} ({self.team}) - {self.points} points"
 
-enemy = {
-    "name": "Enemy",
-    "health": 50,
-    "attack": 5
-}
 
-def print_status():
-    print(f"{player['name']} Health: {player['health']}")
-    print(f"{enemy['name']} Health: {enemy['health']}")
+class FantasyTeam:
+    def __init__(self, name):
+        self.name = name
+        self.players = []
 
-def player_turn():
-    action = input("Choose an action - (attack/heal): ")
-    if action == "attack":
-        damage = random.randint(1, player['attack'])
-        enemy['health'] -= damage
-        print(f"{player['name']} attacks {enemy['name']} for {damage} damage!")
-    elif action == "heal":
-        heal_amount = random.randint(1, player['heal'])
-        player['health'] += heal_amount
-        print(f"{player['name']} heals for {heal_amount} health points!")
-    else:
-        print("Invalid action, try again.")
+    def add_player(self, player):
+        self.players.append(player)
 
-def enemy_turn():
-    damage = random.randint(1, enemy['attack'])
-    player['health'] -= damage
-    print(f"{enemy['name']} attacks {player['name']} for {damage} damage!")
+    def display_team(self):
+        print(f"Fantasy Team: {self.name}")
+        for player in self.players:
+            print(player)
 
-print("Welcome to the RPG Battle System!")
+# Create some Player objects
+player1 = Player("LeBron James", "SF", "Lakers", 25.3)
+player2 = Player("Kevin Durant", "PF", "Nets", 28.5)
+player3 = Player("Steph Curry", "PG", "Warriors", 30.1)
 
-while player['health'] > 0 and enemy['health'] > 0:
-    print_status()
-    
-    player_turn()
-    if enemy['health'] <= 0:
-        print("You defeated the enemy!")
-        break
-    
-    enemy_turn()
-    if player['health'] <= 0:
-        print("You were defeated by the enemy!")
-        break
+# Create a FantasyTeam object and add players to it
+my_team = FantasyTeam("My Team")
+my_team.add_player(player1)
+my_team.add_player(player2)
+my_team.add_player(player3)
+
+# Display the FantasyTeam
+my_team.display_team()
