@@ -1,42 +1,22 @@
 
-maze = [
-    ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#'],
-    ['#', ' ', ' ', ' ', '#', ' ', ' ', ' ', ' ', '#'],
-    ['#', ' ', '#', ' ', '#', ' ', '#', '#', ' ', '#'],
-    ['#', ' ', '#', ' ', '#', ' ', '#', '#', ' ', '#'],
-    ['#', ' ', '#', ' ', ' ', ' ', ' ', '#', 'E', '#'],
-    ['#', ' ', '#', '#', '#', '#', '#', '#', '#', '#'],
-    ['#', 'S', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '#'],
-    ['#', '#', '#', '#', '#', '#', '#', '#', '#', '#']
-]
+import re
 
-def solve(maze, position):
-    if maze[position[0]][position[1]] == 'E':
-        print("Maze solved!")
+def is_valid_ipv6(address):
+    pattern = re.compile('^([0-9a-f]{1,4}:){7}([0-9a-f]{1,4})$', re.IGNORECASE)
+    if pattern.match(address):
         return True
-    elif maze[position[0]][position[1]] == '#' or maze[position[0]][position[1]] == 'X':
+    else:
         return False
-    
-    maze[position[0]][position[1]] = 'X'
-    
-    # Try moving up
-    if solve(maze, (position[0]-1, position[1])):
-        print(f"({position[0]}, {position[1]}) -> Up")
-        return True
-    # Try moving right
-    if solve(maze, (position[0], position[1]+1)):
-        print(f"({position[0]}, {position[1]}) -> Right")
-        return True
-    # Try moving down
-    if solve(maze, (position[0]+1, position[1])):
-        print(f"({position[0]}, {position[1]}) -> Down")
-        return True
-    # Try moving left
-    if solve(maze, (position[0], position[1]-1)):
-        print(f"({position[0]}, {position[1]}) -> Left")
-        return True
-    
-    return False
 
-start_position = (6, 1)
-solve(maze, start_position)
+# Test the function
+address1 = "2001:0db8:85a3:0000:0000:8a2e:0370:7334"
+address2 = "2001:0db8:85a3::8a2e:0370:7334"
+address3 = "2001:0db8:85a3:0000:0000:8a2e:0370"
+address4 = "200.hello.world"
+address5 = "1234:abcd"
+
+print(is_valid_ipv6(address1))  # True
+print(is_valid_ipv6(address2))  # True
+print(is_valid_ipv6(address3))  # False
+print(is_valid_ipv6(address4))  # False
+print(is_valid_ipv6(address5))  # False
