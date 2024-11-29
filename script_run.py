@@ -1,10 +1,25 @@
 
-def get_union(set1, set2):
-    union_set = set1.union(set2)
-    return union_set
+def longest_increasing_subsequence(arr):
+    n = len(arr)
+    dp = [1] * n
 
-set1 = {1, 2, 3, 4, 5}
-set2 = {4, 5, 6, 7, 8}
+    for i in range(1, n):
+        for j in range(0, i):
+            if arr[i] > arr[j] and dp[i] < dp[j] + 1:
+                dp[i] = dp[j] + 1
 
-union = get_union(set1, set2)
-print("Union of set1 and set2:", union)
+    max_length = max(dp)
+    subsequence = []
+    index = dp.index(max_length)
+    subsequence.append(arr[index])
+
+    for i in range(index - 1, -1, -1):
+        if arr[i] < arr[index] and dp[i] == dp[index] - 1:
+            subsequence.insert(0, arr[i])
+            index = i
+
+    return subsequence
+
+arr = [10, 22, 9, 33, 21, 50, 41, 60, 80]
+print("Original array:", arr)
+print("Longest increasing subsequence:", longest_increasing_subsequence(arr))
