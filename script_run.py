@@ -1,25 +1,25 @@
 
-def longest_increasing_subsequence(arr):
-    n = len(arr)
-    dp = [1] * n
+import numpy as np
 
-    for i in range(1, n):
-        for j in range(0, i):
-            if arr[i] > arr[j] and dp[i] < dp[j] + 1:
-                dp[i] = dp[j] + 1
+# Generate some random data
+np.random.seed(0)
+X = 2 * np.random.rand(100, 1)
+y = 4 + 3 * X + np.random.randn(100, 1)
 
-    max_length = max(dp)
-    subsequence = []
-    index = dp.index(max_length)
-    subsequence.append(arr[index])
+# Add a column of ones to X for bias term
+X_b = np.c_[np.ones((100, 1)), X]
 
-    for i in range(index - 1, -1, -1):
-        if arr[i] < arr[index] and dp[i] == dp[index] - 1:
-            subsequence.insert(0, arr[i])
-            index = i
+# Calculate the optimal theta using the normal equation
+theta_best = np.linalg.inv(X_b.T.dot(X_b)).dot(X_b.T).dot(y)
 
-    return subsequence
+# Make predictions
+X_new = np.array([[0], [2]])
+X_new_b = np.c_[np.ones((2, 1)), X_new]
+y_predict = X_new_b.dot(theta_best)
 
-arr = [10, 22, 9, 33, 21, 50, 41, 60, 80]
-print("Original array:", arr)
-print("Longest increasing subsequence:", longest_increasing_subsequence(arr))
+# Display the results
+print("Optimal theta:")
+print(theta_best)
+
+print("\nPredictions:")
+print(y_predict)
