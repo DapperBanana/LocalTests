@@ -1,25 +1,12 @@
 
-import numpy as np
+def find_largest_element(lst):
+    max_element = lst[0]
+    for element in lst:
+        if element > max_element:
+            max_element = element
+    return max_element
 
-# Generate some random data
-np.random.seed(0)
-X = 2 * np.random.rand(100, 1)
-y = 4 + 3 * X + np.random.randn(100, 1)
-
-# Add a column of ones to X for bias term
-X_b = np.c_[np.ones((100, 1)), X]
-
-# Calculate the optimal theta using the normal equation
-theta_best = np.linalg.inv(X_b.T.dot(X_b)).dot(X_b.T).dot(y)
-
-# Make predictions
-X_new = np.array([[0], [2]])
-X_new_b = np.c_[np.ones((2, 1)), X_new]
-y_predict = X_new_b.dot(theta_best)
-
-# Display the results
-print("Optimal theta:")
-print(theta_best)
-
-print("\nPredictions:")
-print(y_predict)
+# Test the function
+my_list = [10, 5, 20, 8, 15]
+largest_element = find_largest_element(my_list)
+print(f'The largest element in the list is: {largest_element}')
