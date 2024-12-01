@@ -1,15 +1,13 @@
 
-def is_valid_palindrome(s):
-    # Remove all non-alphanumeric characters and convert the string to lowercase
-    s = ''.join(c for c in s if c.isalnum()).lower()
-    
-    # Check if the string is a palindrome
-    return s == s[::-1]
+def is_leap_year(year):
+    if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
+        return True
+    else:
+        return False
 
-# Input string from user
-input_string = input("Enter a string: ")
+year = int(input("Enter a year: "))
 
-if is_valid_palindrome(input_string):
-    print("The given string is a valid palindrome sentence.")
+if is_leap_year(year):
+    print(f"{year} is a leap year.")
 else:
-    print("The given string is not a valid palindrome sentence.")
+    print(f"{year} is not a leap year.")
