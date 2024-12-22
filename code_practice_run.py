@@ -1,17 +1,17 @@
 
-def longest_common_prefix(strs):
-    if not strs:
-        return ""
-    
-    shortest_str = min(strs, key=len)
-    
-    for i, char in enumerate(shortest_str):
-        for other_str in strs:
-            if other_str[i] != char:
-                return shortest_str[:i]
-    
-    return shortest_str
+def find_replace_word(file_name, old_word, new_word):
+    with open(file_name, 'r') as file:
+        text = file.read()
 
-# Test the function
-str_list = ["flower", "flow", "flight"]
-print(longest_common_prefix(str_list))  # Output: "fl"
+    new_text = text.replace(old_word, new_word)
+
+    with open(file_name, 'w') as file:
+        file.write(new_text)
+
+file_name = 'sample.txt'  # Name of the text file
+old_word = 'old_word'  # Word to be replaced
+new_word = 'new_word'  # Word to replace the old word with
+
+find_replace_word(file_name, old_word, new_word)
+
+print(f"Word '{old_word}' replaced with '{new_word}' in '{file_name}'")
