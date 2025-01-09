@@ -1,21 +1,10 @@
 
-def matrix_mul(A, B):
-    result = [[0 for _ in range(len(B[0]))] for _ in range(len(A))]
-    
-    for i in range(len(A)):
-        for j in range(len(B[0])):
-            for k in range(len(B)):
-                result[i][j] += A[i][k] * B[k][j]
-    
-    return result
+def sort_list(nums):
+    sorted_nums = sorted(nums)
+    return sorted_nums
 
-A = [[1, 2, 3],
-     [4, 5, 6]]
-B = [[7, 8],
-     [9, 10],
-     [11, 12]]
+# Example list of integers
+nums = [5, 2, 7, 1, 3, 9, 4]
 
-result = matrix_mul(A, B)
-
-for row in result:
-    print(row)
+sorted_nums = sort_list(nums)
+print("Sorted list in ascending order:", sorted_nums)
