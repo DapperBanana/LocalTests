@@ -1,14 +1,12 @@
 
-def calculate_trapezoidal_prism_area(a, b, h, H):
-    base_area = (a + b) * h / 2
-    lateral_area = 2 * base_area + (a + b) * H
-    total_area = 2 * base_area + lateral_area
-    return total_area
+def is_leap_year(year):
+    if (year % 4 == 0 and year % 100 != 0) or (year % 400 == 0):
+        return True
+    else:
+        return False
 
-a = float(input("Enter the length of the top base of the trapezoidal prism: "))
-b = float(input("Enter the length of the bottom base of the trapezoidal prism: "))
-h = float(input("Enter the height of the trapezoidal prism: "))
-H = float(input("Enter the length between the top and bottom base of the trapezoidal prism: "))
-
-area = calculate_trapezoidal_prism_area(a, b, h, H)
-print("The area of the trapezoidal prism is:", area)
+year = int(input("Enter a year: "))
+if is_leap_year(year):
+    print(year, "is a leap year.")
+else:
+    print(year, "is not a leap year.")
