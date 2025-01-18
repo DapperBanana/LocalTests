@@ -1,15 +1,17 @@
 
-from PIL import Image
+import numpy as np
 
-def extract_metadata(image_file):
+def is_invertible(matrix):
     try:
-        with Image.open(image_file) as img:
-            metadata = img.info
-            for key, value in metadata.items():
-                print(f"{key}: {value}")
-    except Exception as e:
-        print(f"Error: {e}")
+        np.linalg.inv(matrix)
+        return True
+    except np.linalg.LinAlgError:
+        return False
 
-if __name__ == "__main__":
-    image_file = "example.jpg"  # Change this to the path of your image file
-    extract_metadata(image_file)
+# Example matrix
+matrix = np.array([[1, 2], [3, 4]])
+
+if is_invertible(matrix):
+    print("The matrix is invertible")
+else:
+    print("The matrix is not invertible")
