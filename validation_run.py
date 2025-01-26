@@ -1,16 +1,14 @@
 
-def prime_factors(n):
-    factors = []
-    divisor = 2
+import math
 
-    while divisor <= n:
-        if n % divisor == 0:
-            factors.append(divisor)
-            n = n // divisor
-        else:
-            divisor += 1
+def calculate_square_root(num):
+    if num < 0:
+        return "Invalid input. Please enter a non-negative number."
+    else:
+        return math.sqrt(num)
 
-    return factors
+# Main program
+number = float(input("Enter a number to calculate its square root: "))
+result = calculate_square_root(number)
 
-num = int(input("Enter a number: "))
-print(f"The prime factors of {num} are: {prime_factors(num)}")
+print(f"The square root of {number} is {result}")
