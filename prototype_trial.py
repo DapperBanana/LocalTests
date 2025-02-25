@@ -1,19 +1,20 @@
 
-def is_prime(n):
-    if n <= 1:
+import numpy as np
+
+def is_orthogonal(matrix):
+    rows, cols = matrix.shape
+    
+    if rows != cols:
         return False
-    for i in range(2, int(n**0.5) + 1):
-        if n % i == 0:
-            return False
-    return True
 
-def find_next_prime(num):
-    next_num = num + 1
-    while True:
-        if is_prime(next_num):
-            return next_num
-        next_num += 1
+    orthogonal_check = np.dot(matrix, matrix.T)
+    
+    return np.allclose(orthogonal_check, np.eye(rows))
 
-num = int(input("Enter a number: "))
-next_prime = find_next_prime(num)
-print(f"The smallest prime number greater than {num} is {next_prime}")
+# Example matrix
+matrix = np.array([[1, 0], [0, -1]])
+
+if is_orthogonal(matrix):
+    print("The given matrix is orthogonal.")
+else:
+    print("The given matrix is not orthogonal.")
