@@ -1,11 +1,19 @@
 
-def sum_of_digits(num):
-    total = 0
-    while num > 0:
-        total += num % 10
-        num //= 10
-    return total
+def find_common_characters(str1, str2):
+    common_chars = set()
+    
+    for char in str1:
+        if char in str2:
+            common_chars.add(char)
+    
+    return common_chars
 
-number = int(input("Enter a number: "))
-result = sum_of_digits(number)
-print(f"The sum of digits in {number} is: {result}")
+# Input two strings
+string1 = input("Enter the first string: ")
+string2 = input("Enter the second string: ")
+
+# Find common characters
+common_chars = find_common_characters(string1, string2)
+
+# Print the common characters
+print("Common characters between the two strings are:", common_chars)
