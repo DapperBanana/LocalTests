@@ -1,16 +1,21 @@
 
-def is_perfect_digital_invariant(num):
-    num_str = str(num)
-    for i in range(len(num_str)-1):
-        if abs(int(num_str[i]) - int(num_str[i+1])) != 1:
-            return False
-    return True
+def find_longest_consecutive_sequence(nums):
+    nums_set = set(nums)
+    longest_sequence = []
+    
+    for num in nums_set:
+        if num - 1 not in nums_set:
+            current_sequence = [num]
+            current_num = num + 1
+            while current_num in nums_set:
+                current_sequence.append(current_num)
+                current_num += 1
+            
+            if len(current_sequence) > len(longest_sequence):
+                longest_sequence = current_sequence
+    
+    return longest_sequence
 
-# Test the function with different numbers
-num1 = 12345
-num2 = 987654
-num3 = 13579
-
-print(is_perfect_digital_invariant(num1))  # False
-print(is_perfect_digital_invariant(num2))  # True
-print(is_perfect_digital_invariant(num3))  # True
+# Test the function
+nums = [100, 4, 200, 1, 3, 2, 5, 101]
+print("Longest consecutive sequence:", find_longest_consecutive_sequence(nums))
