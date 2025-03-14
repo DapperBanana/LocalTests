@@ -1,26 +1,56 @@
 
-import rasterio
-import numpy as np
+class Player:
+    def __init__(self, name, position, team):
+        self.name = name
+        self.position = position
+        self.team = team
 
-# Open the satellite image file using rasterio
-image_file = 'path/to/your/satellite/image.tif'
-dataset = rasterio.open(image_file)
+    def __str__(self):
+        return f"{self.name} ({self.position}) - {self.team}"
 
-# Read the image bands (assuming the image has red, green, and blue bands)
-red_band = dataset.read(1)
-green_band = dataset.read(2)
-blue_band = dataset.read(3)
+class FantasyTeam:
+    def __init__(self, team_name):
+        self.team_name = team_name
+        self.players = []
 
-# Calculate the normalized difference vegetation index (NDVI)
-ndvi = (red_band - blue_band) / (red_band + blue_band)
+    def add_player(self, player):
+        self.players.append(player)
 
-# Threshold NDVI values to identify vegetation
-vegetation_pixels = np.where(ndvi > 0.5)
+    def display_team(self):
+        print(f"Fantasy Team: {self.team_name}")
+        print("Players:")
+        for player in self.players:
+            print(player)
 
-# Calculate the percentage of vegetation in the image
-vegetation_percentage = len(vegetation_pixels[0]) / (dataset.width * dataset.height) * 100
+def main():
+    print("Welcome to the Fantasy Sports Manager!")
+    team_name = input("Enter your fantasy team name: ")
+    fantasy_team = FantasyTeam(team_name)
 
-print(f'Percentage of vegetation in the image: {vegetation_percentage:.2f}%')
+    while True:
+        print("\nMenu:")
+        print("1. Add player")
+        print("2. View team")
+        print("3. Quit")
+        choice = input("Enter your choice: ")
 
-# Close the dataset
-dataset.close()
+        if choice == "1":
+            name = input("Enter player name: ")
+            position = input("Enter player position: ")
+            team = input("Enter player team: ")
+            player = Player(name, position, team)
+            fantasy_team.add_player(player)
+            print(f"{name} has been added to your team.")
+        
+        elif choice == "2":
+            fantasy_team.display_team()
+
+        elif choice == "3":
+            print("Exiting program. Goodbye!")
+            break
+        
+        else:
+            print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    main()
