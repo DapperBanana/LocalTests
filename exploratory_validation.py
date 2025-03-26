@@ -1,14 +1,21 @@
 
-def find_common_elements(list1, list2):
-    common_elements = [element for element in list1 if element in list2]
-    return common_elements
+import random
 
-# Input lists
-list1 = [1, 2, 3, 4, 5]
-list2 = [4, 5, 6, 7, 8]
+# List of greetings
+greetings = ['hi', 'hello', 'hey', 'hi there']
 
-# Find the common elements
-common_elements = find_common_elements(list1, list2)
+# List of responses
+responses = ['Hello!', 'Hi there!', 'Hey!', 'Nice to meet you!']
 
-# Print the common elements
-print("Common Elements:", common_elements)
+# Function to respond to user input
+def respond(input):
+    if input.lower() in greetings:
+        return random.choice(responses)
+    else:
+        return "I'm just a basic chatbot. Feel free to say hi or ask me anything!"
+
+# Main program loop
+while True:
+    user_input = input("You: ")
+    response = respond(user_input)
+    print("Chatbot:", response)
