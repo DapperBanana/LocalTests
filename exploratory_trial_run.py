@@ -1,10 +1,23 @@
 
-def is_palindrome(year):
-    year_str = str(year)
-    return year_str == year_str[::-1]
+import random
 
-year = int(input("Enter a year: "))
-if is_palindrome(year):
-    print(f"{year} is a palindrome year.")
-else:
-    print(f"{year} is not a palindrome year.")
+def main():
+    while True:
+        user_choice = input("Choose rock, paper, or scissors: ").lower()
+        computer_choice = random.choice(["rock", "paper", "scissors"])
+        
+        print(f"Computer chose: {computer_choice}")
+        
+        if user_choice == computer_choice:
+            print("It's a tie!")
+        elif (user_choice == "rock" and computer_choice == "scissors") or (user_choice == "paper" and computer_choice == "rock") or (user_choice == "scissors" and computer_choice == "paper"):
+            print("You win!")
+        else:
+            print("You lose!")
+        
+        play_again = input("Do you want to play again? (yes/no)").lower()
+        if play_again != "yes":
+            break
+
+if __name__ == "__main__":
+    main()
