@@ -1,25 +1,17 @@
 
-from pymongo import MongoClient
+def longest_common_prefix(strs):
+    if not strs:
+        return ""
+    
+    prefix = strs[0]
+    for string in strs[1:]:
+        while string.find(prefix) != 0:
+            prefix = prefix[:-1]
+            if not prefix:
+                return ""
+    
+    return prefix
 
-# Connect to MongoDB
-client = MongoClient('localhost', 27017)
-db = client['mydatabase']
-collection = db['mycollection']
-
-# Create
-data = {'name': 'John', 'age': 30, 'city': 'New York'}
-result = collection.insert_one(data)
-print('Inserted document with ID:', result.inserted_id)
-
-# Read
-result = collection.find_one({'name': 'John'})
-print('Retrieved document:', result)
-
-# Update
-update_data = {'$set': {'age': 31}}
-result = collection.update_one({'name': 'John'}, update_data)
-print('Updated document count:', result.modified_count)
-
-# Delete
-result = collection.delete_one({'name': 'John'})
-print('Deleted document count:', result.deleted_count)
+# Test the function
+strs = ["flower", "flow", "flight"]
+print("Longest common prefix:", longest_common_prefix(strs))
