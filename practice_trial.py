@@ -1,48 +1,13 @@
 
-def print_board(board):
-    for row in board:
-        print("|".join(row))
-        print("-" * 5)
-
-def check_win(board, player):
-    for row in board:
-        if all(cell == player for cell in row):
-            return True
+def is_palindrome(s):
+    s = s.lower()  # convert to lowercase for case-insensitive comparison
+    s = ''.join(ch for ch in s if ch.isalnum())  # remove non-alphanumeric characters
     
-    for col in range(3):
-        if all(board[row][col] == player for row in range(3)):
-            return True
+    return s == s[::-1]  # check if the string is equal to its reverse
     
-    if all(board[i][i] == player for i in range(3)) or all(board[i][2-i] == player for i in range(3)):
-        return True
-
-    return False
-
-def main():
-    board = [[" " for _ in range(3)] for _ in range(3)]
-    players = ['X', 'O']
-    player_idx = 0
-
-    while True:
-        print_board(board)
-        player = players[player_idx]
-        print(f"Player {player}'s turn")
-        row = int(input("Enter row number (0-2): "))
-        col = int(input("Enter column number (0-2): "))
-
-        if board[row][col] == " ":
-            board[row][col] = player
-            if check_win(board, player):
-                print_board(board)
-                print(f"Player {player} wins!")
-                break
-            elif all(all(cell != " " for cell in row) for row in board):
-                print_board(board)
-                print("It's a tie!")
-                break
-            player_idx = 1 - player_idx
-        else:
-            print("That cell is already taken. Try again.")
-
-if __name__ == "__main__":
-    main()
+# Test the function
+input_str = "A man, a plan, a canal - Panama!"
+if is_palindrome(input_str):
+    print(f"{input_str} is a palindrome.")
+else:
+    print(f"{input_str} is not a palindrome.")
