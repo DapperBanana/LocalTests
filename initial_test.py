@@ -1,24 +1,19 @@
 
-from PIL import Image
-
-def grayscale_conversion(image_path):
-    try:
-        # Open the image file
-        image = Image.open(image_path)
-        
-        # Convert the image to grayscale
-        grayscale_image = image.convert('L')
-        
-        # Save the grayscale image
-        grayscale_image.save('grayscale_image.jpg')
-        
-        print("Grayscale conversion completed. Saved as 'grayscale_image.jpg'")
+def is_isogram(word):
+    word = word.lower()
+    seen = set()
     
-    except IOError:
-        print("Unable to open image file. Please check the file path.")
+    for letter in word:
+        if letter.isalpha():
+            if letter in seen:
+                return False
+            seen.add(letter)
+    
+    return True
 
-# Specify the path to the image file
-image_path = "image.jpg"
-
-# Perform grayscale conversion
-grayscale_conversion(image_path)
+# Test the function
+word = input("Enter a word: ")
+if is_isogram(word):
+    print(f"{word} is an isogram.")
+else:
+    print(f"{word} is not an isogram.")
