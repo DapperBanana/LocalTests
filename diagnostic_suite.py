@@ -1,23 +1,14 @@
 
-import re
+def find_and_replace_word(file_name, target_word, replacement_word):
+    with open(file_name, 'r') as file:
+        content = file.read()
 
-def extract_email_addresses(text):
-    pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
-    emails = re.findall(pattern, text)
-    
-    return emails
+    modified_content = content.replace(target_word, replacement_word)
 
-def main():
-    with open('sample_text.txt', 'r') as file:
-        text = file.read()
-        
-    email_addresses = extract_email_addresses(text)
-    
-    if email_addresses:
-        for email in email_addresses:
-            print(email)
-    else:
-        print("No email addresses found in the text.")
+    with open(file_name, 'w') as file:
+        file.write(modified_content)
 
-if __name__ == "__main__":
-    main()
+    print(f"Word '{target_word}' replaced with '{replacement_word}' in '{file_name}'.")
+
+# Replace 'old_word' with 'new_word' in 'example.txt' file
+find_and_replace_word('example.txt', 'old_word', 'new_word')
