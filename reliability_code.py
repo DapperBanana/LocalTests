@@ -1,19 +1,27 @@
 
-def chatbot():
-    print("Hello! I'm a chatbot. How can I help you today?")
-    
-    while True:
-        user_input = input("You: ")
-        
-        if user_input.lower() == "hello":
-            print("Chatbot: Hello there!")
-        elif user_input.lower() == "how are you":
-            print("Chatbot: I'm just a program, so I don't have feelings. But thanks for asking!")
-        elif user_input.lower() == "goodbye":
-            print("Chatbot: Goodbye! Have a great day.")
-            break
-        else:
-            print("Chatbot: I'm sorry, I didn't understand that. Can you please rephrase?")
-            
-if __name__ == "__main__":
-    chatbot()
+def longest_increasing_subsequence(arr):
+    n = len(arr)
+    lis = [1] * n
+
+    for i in range(1, n):
+        for j in range(0, i):
+            if arr[i] > arr[j]:
+                lis[i] = max(lis[i], lis[j] + 1)
+
+    max_length = max(lis)
+
+    # Reconstructing the longest increasing subsequence
+    subsequence = []
+    current_length = max_length
+    for i in range(n - 1, -1, -1):
+        if lis[i] == current_length:
+            subsequence.insert(0, arr[i])
+            current_length -= 1
+
+    return max_length, subsequence
+
+# Test the function
+arr = [10, 22, 9, 33, 21, 50, 41, 60, 80]
+length, subsequence = longest_increasing_subsequence(arr)
+print("Length of the longest increasing subsequence:", length)
+print("Longest increasing subsequence:", subsequence)
