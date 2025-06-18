@@ -1,8 +1,8 @@
 
 def is_prime(num):
-    if num <= 1:
+    if num < 2:
         return False
-    for i in range(2, int(num ** 0.5) + 1):
+    for i in range(2, int(num**0.5) + 1):
         if num % i == 0:
             return False
     return True
@@ -17,4 +17,5 @@ def count_prime_numbers(start, end):
 start = int(input("Enter the start of the range: "))
 end = int(input("Enter the end of the range: "))
 
-print(f'The number of prime numbers in the range {start} to {end} is: {count_prime_numbers(start, end)}')
+count = count_prime_numbers(start, end)
+print(f"The number of prime numbers in the range {start} to {end} is: {count}")
