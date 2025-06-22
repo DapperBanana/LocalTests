@@ -1,41 +1,13 @@
 
-def lcs(X, Y):
-    m = len(X)
-    n = len(Y)
-  
-    L = [[0] * (n + 1) for i in range(m + 1)]
-  
-    for i in range(m + 1):
-        for j in range(n + 1):
-            if i == 0 or j == 0:
-                L[i][j] = 0
-            elif X[i-1] == Y[j-1]:
-                L[i][j] = L[i-1][j-1] + 1
-            else:
-                L[i][j] = max(L[i-1][j], L[i][j-1])
-  
-    index = L[m][n]
-  
-    lcs = [""] * (index+1)
-    lcs[index] = ""
-  
-    i = m
-    j = n
-    while i > 0 and j > 0:
-  
-        if X[i-1] == Y[j-1]:
-            lcs[index-1] = X[i-1]
-            i -= 1
-            j -= 1
-            index -= 1
-  
-        elif L[i-1][j] > L[i][j-1]:
-            i -= 1
-        else:
-            j -= 1
-  
-    print("Longest Common Subsequence of '{}' and '{}' is: {}".format(X, Y, "".join(lcs)))
-  
-X = "AGGTAB"
-Y = "GXTXAYB"
-lcs(X, Y)
+def remove_duplicates(input_list):
+    output_list = []
+    seen = set()
+    for item in input_list:
+        if item not in seen:
+            output_list.append(item)
+            seen.add(item)
+    return output_list
+
+input_list = [1, 2, 3, 1, 2, 4, 5, 6, 7, 5]
+output_list = remove_duplicates(input_list)
+print(output_list)
