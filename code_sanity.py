@@ -1,25 +1,14 @@
 
-def merge_sorted_lists(list1, list2):
-    merged_list = []
-    i = 0
-    j = 0
+def calculate_pyramid_area(base_area, height):
+    base_area = float(base_area)
+    height = float(height)
     
-    while i < len(list1) and j < len(list2):
-        if list1[i] < list2[j]:
-            merged_list.append(list1[i])
-            i += 1
-        else:
-            merged_list.append(list2[j])
-            j += 1
+    pyramid_area = base_area + (base_area * 4 * (height**2))**0.5
     
-    merged_list.extend(list1[i:])
-    merged_list.extend(list2[j:])
-    
-    return merged_list
+    return pyramid_area
 
-# Example usage
-list1 = [1, 3, 5, 7]
-list2 = [2, 4, 6, 8]
+base_area = input("Enter the base area of the pyramid: ")
+height = input("Enter the height of the pyramid: ")
 
-merged_list = merge_sorted_lists(list1, list2)
-print(merged_list)
+area = calculate_pyramid_area(base_area, height)
+print(f"The area of the pyramid is: {area}")
