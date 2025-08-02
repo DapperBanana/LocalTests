@@ -1,25 +1,19 @@
 
-import random
+def find_lcm(x, y):
+    if x > y:
+        greater = x
+    else:
+        greater = y
+        
+    while True:
+        if (greater % x == 0) and (greater % y == 0):
+            lcm = greater
+            break
+        greater += 1
+        
+    return lcm
 
-# List of possible responses from the chatbot
-responses = [
-    "Hello! How can I help you?",
-    "What's on your mind?",
-    "Tell me more about that.",
-    "I'm here to chat with you.",
-    "How are you feeling today?",
-    "Let's talk about something interesting.",
-    "I'm here to listen."
-]
+num1 = int(input("Enter first number: "))
+num2 = int(input("Enter second number: "))
 
-while True:
-    user_input = input("You: ").lower()
-
-    # Check if the user wants to quit the chatbot
-    if user_input == "quit":
-        print("Chatbot: Goodbye! Have a great day.")
-        break
-
-    # Generate a random response from the chatbot
-    response = random.choice(responses)
-    print("Chatbot:", response)
+print("The LCM of", num1, "and", num2, "is", find_lcm(num1, num2))
