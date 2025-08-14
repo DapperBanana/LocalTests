@@ -1,17 +1,18 @@
 
-import numpy as np
+import re
 
-# Function to calculate correlation coefficient
-def correlation_coefficient(list1, list2):
-    correlation = np.corrcoef(list1, list2)[0, 1]
-    return correlation
+def extract_emails(text):
+    email_pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
+    emails = re.findall(email_pattern, text)
+    return emails
 
-# Example lists
-list1 = [1, 2, 3, 4, 5]
-list2 = [5, 4, 3, 2, 1]
+# Open the text document
+with open('text_document.txt', 'r') as file:
+    text = file.read()
 
-# Calculate correlation coefficient
-correlation = correlation_coefficient(list1, list2)
+# Extract email addresses from the text
+emails = extract_emails(text)
 
-# Print correlation coefficient
-print("Correlation Coefficient:", correlation)
+# Print the extracted email addresses
+for email in emails:
+    print(email)
