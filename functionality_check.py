@@ -1,17 +1,9 @@
 
-import re
+def findIntersection(list1, list2):
+    return list(set(list1) & set(list2))
 
-def extract_emails(text):
-    emails = re.findall(r'\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}\b', text)
-    return emails
+list1 = [1, 2, 3, 4, 5]
+list2 = [4, 5, 6, 7, 8]
 
-# Read text from a file
-with open('text_document.txt', 'r') as file:
-    text = file.read()
-
-# Extract email addresses from the text
-email_addresses = extract_emails(text)
-
-# Print the extracted email addresses
-for email in email_addresses:
-    print(email)
+intersection = findIntersection(list1, list2)
+print(intersection)
