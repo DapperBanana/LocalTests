@@ -1,35 +1,10 @@
 
-def is_symmetric(matrix):
-    if len(matrix) != len(matrix[0]):
-        return False
-    
-    n = len(matrix)
-    for i in range(n):
-        for j in range(i+1, n):
-            if matrix[i][j] != matrix[j][i]:
-                return False
-    
-    return True
+from fractions import Fraction
 
-# Example matrix
-matrix1 = [
-    [1, 2, 3],
-    [2, 4, 5],
-    [3, 5, 6]
-]
+def decimal_to_fraction(decimal):
+    return Fraction(decimal).limit_denominator()
 
-matrix2 = [
-    [1, 2, 3],
-    [4, 5, 6],
-    [7, 8, 9]
-]
+decimal = float(input("Enter a decimal number: "))
+fraction = decimal_to_fraction(decimal)
 
-if is_symmetric(matrix1):
-    print("Matrix 1 is symmetric.")
-else:
-    print("Matrix 1 is not symmetric.")
-
-if is_symmetric(matrix2):
-    print("Matrix 2 is symmetric.")
-else:
-    print("Matrix 2 is not symmetric.")
+print(f"The fraction equivalent of {decimal} is: {fraction}")
