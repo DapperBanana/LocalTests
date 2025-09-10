@@ -1,29 +1,14 @@
 
-def encrypt(text, shift):
-    encrypted_text = ""
-    for char in text:
-        if char.isalpha():
-            shifted = ord(char) + shift
-            if char.islower():
-                if shifted > ord('z'):
-                    shifted -= 26
-                encrypted_text += chr(shifted)
-            elif char.isupper():
-                if shifted > ord('Z'):
-                    shifted -= 26
-                encrypted_text += chr(shifted)
-        else:
-            encrypted_text += char
-    return encrypted_text
+def find_median(numbers):
+    numbers.sort()
+    n = len(numbers)
+    if n % 2 == 0:
+        median = (numbers[n//2 - 1] + numbers[n//2]) / 2
+    else:
+        median = numbers[n//2]
+    return median
 
-def decrypt(text, shift):
-    return encrypt(text, -shift)
+numbers = [4, 8, 2, 6, 3, 1, 5, 7]
+median = find_median(numbers)
 
-text = "Hello, World!"
-shift = 3
-
-encrypted_text = encrypt(text, shift)
-print("Encrypted text:", encrypted_text)
-
-decrypted_text = decrypt(encrypted_text, shift)
-print("Decrypted text:", decrypted_text)
+print(f"The median of the list {numbers} is: {median}")
