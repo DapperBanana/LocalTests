@@ -1,57 +1,21 @@
 
-def print_board(board):
-    for row in board:
-        print(" | ".join(row))
-        print("-" * 5)
+def matrix_multiplication(matrix_1, matrix_2):
+    result = [[0 for _ in range(len(matrix_2[0]))] for _ in range(len(matrix_1))]
+    
+    for i in range(len(matrix_1)):
+        for j in range(len(matrix_2[0])):
+            for k in range(len(matrix_2)):
+                result[i][j] += matrix_1[i][k] * matrix_2[k][j]
+    
+    return result
 
-def check_winner(board, player):
-    # Check rows
-    for row in board:
-        if all(mark == player for mark in row):
-            return True
+# Example matrices
+matrix_1 = [[1, 2],
+            [3, 4]]
 
-    # Check columns
-    for col in range(3):
-        if all(board[row][col] == player for row in range(3)):
-            return True
+matrix_2 = [[5, 6],
+            [7, 8]]
 
-    # Check diagonals
-    if all(board[i][i] == player for i in range(3)) or all(board[i][2-i] == player for i in range(3)):
-        return True
-
-    return False
-
-def tic_tac_toe():
-    board = [[" " for _ in range(3)] for _ in range(3)]
-    players = ["X", "O"]
-    turn = 0
-
-    while True:
-        print_board(board)
-
-        player = players[turn % 2]
-        print(f"Player {player}'s turn")
-
-        row = int(input("Enter row (0-2): "))
-        col = int(input("Enter column (0-2): ")
-
-        if row < 0 or row > 2 or col < 0 or col > 2 or board[row][col] != " ":
-            print("Invalid move. Try again.")
-            continue
-
-        board[row][col] = player
-
-        if check_winner(board, player):
-            print_board(board)
-            print(f"Player {player} wins!")
-            break
-
-        turn += 1
-
-        if turn == 9:
-            print_board(board)
-            print("It's a tie!")
-            break
-
-if __name__ == "__main__":
-    tic_tac_toe()
+result = matrix_multiplication(matrix_1, matrix_2)
+for row in result:
+    print(row)
