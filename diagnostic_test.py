@@ -1,12 +1,14 @@
 
-def reverse_string(input_str):
-    return input_str[::-1]
+import re
 
-# Get input from user
-original_str = input("Enter a string: ")
+def extract_hashtags(text):
+    hashtags = re.findall(r"#(\w+)", text)
+    return hashtags
 
-# Reverse the string
-reversed_str = reverse_string(original_str)
+if __name__ == "__main__":
+    text = "I love #coding and #programming! #Python is my favorite language."
+    hashtags = extract_hashtags(text)
 
-# Output the reversed string
-print("Reversed string:", reversed_str)
+    print("Hashtags found in the text:")
+    for hashtag in hashtags:
+        print(hashtag)
