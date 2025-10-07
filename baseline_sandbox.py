@@ -1,21 +1,8 @@
 
-def sum_of_digits(n):
-    # Convert the number to a string to iterate through each digit
-    str_n = str(n)
-    
-    # Initialize a variable to store the sum of digits
-    sum_digits = 0
-    
-    # Iterate through each digit in the number and add it to the sum_digits variable
-    for digit in str_n:
-        sum_digits += int(digit)
-    
-    return sum_digits
+def decimal_to_binary(decimal_num):
+    return bin(decimal_num).replace("0b", "")
 
-# Input a number from user
-num = int(input("Enter a number: "))
+decimal_num = int(input("Enter a decimal number: "))
+binary_num = decimal_to_binary(decimal_num)
 
-# Calculate the sum of digits in the given number
-result = sum_of_digits(num)
-
-print("The sum of digits in the number is:", result)
+print(f"The binary representation of {decimal_num} is {binary_num}")
