@@ -1,18 +1,10 @@
 
-import re
+import math
 
-def extract_emails(text):
-    email_pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
-    emails = re.findall(email_pattern, text)
-    return emails
+def calculate_area_of_pentagon(side_length):
+    area = (0.25 * math.sqrt(5 * (5 + 2 * math.sqrt(5)))) * side_length ** 2
+    return area
 
-# Read the text document
-with open('text_document.txt', 'r') as file:
-    text = file.read()
-    
-# Extract email addresses from the text
-emails = extract_emails(text)
-
-# Print the extracted email addresses
-for email in emails:
-    print(email)
+side_length = float(input("Enter the side length of the pentagon: "))
+area = calculate_area_of_pentagon(side_length)
+print(f"The area of the pentagon is: {area}")
