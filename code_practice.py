@@ -1,19 +1,12 @@
 
-def is_prime(num):
-    if num <= 1:
-        return False
-    for i in range(2, int(num ** 0.5) + 1):
-        if num % i == 0:
-            return False
-    return True
+def fibonacci_sequence(n):
+    fibonacci = [0, 1]
+    for i in range(2, n):
+        next_num = fibonacci[i-1] + fibonacci[i-2]
+        fibonacci.append(next_num)
+    return fibonacci
 
-def prime_sum(limit):
-    prime_sum = 0
-    for i in range(2, limit + 1):
-        if is_prime(i):
-            prime_sum += i
-    return prime_sum
-
-limit = int(input("Enter the limit: "))
-total_prime_sum = prime_sum(limit)
-print(f"The sum of all prime numbers up to {limit} is: {total_prime_sum}")
+n_terms = int(input("Enter the number of terms: "))
+result = fibonacci_sequence(n_terms)
+print("Fibonacci sequence up to", n_terms, "terms:")
+print(result)
