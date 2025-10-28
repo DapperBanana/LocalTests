@@ -1,19 +1,24 @@
 
-def matrix_multiplication(matrix1, matrix2):
-    result = [[0 for _ in range(len(matrix2[0]))] for _ in range(len(matrix1))]
+def merge_sorted_lists(list1, list2):
+    merged_list = []
+    i = 0
+    j = 0
     
-    for i in range(len(matrix1)):
-        for j in range(len(matrix2[0])):
-            for k in range(len(matrix2)):
-                result[i][j] += matrix1[i][k] * matrix2[k][j]
+    while i < len(list1) and j < len(list2):
+        if list1[i] < list2[j]:
+            merged_list.append(list1[i])
+            i += 1
+        else:
+            merged_list.append(list2[j])
+            j += 1
     
-    return result
+    merged_list += list1[i:]
+    merged_list += list2[j:]
+    
+    return merged_list
 
-# Example matrices
-matrix1 = [[1, 2], [3, 4]]
-matrix2 = [[5, 6], [7, 8]]
-
-result = matrix_multiplication(matrix1, matrix2)
-
-for row in result:
-    print(row)
+# Example
+list1 = [1, 3, 5, 7]
+list2 = [2, 4, 6, 8]
+merged_list = merge_sorted_lists(list1, list2)
+print(merged_list)
