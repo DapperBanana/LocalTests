@@ -1,20 +1,22 @@
 
-def is_anagram(string1, string2):
-    # Remove spaces and convert to lowercase
-    string1 = string1.replace(' ', '').lower()
-    string2 = string2.replace(' ', '').lower()
-    
-    # Check if the lengths of the strings are the same
-    if len(string1) != len(string2):
+def is_prime(num):
+    if num < 2:
         return False
+    for i in range(2, int(num**0.5) + 1):
+        if num % i == 0:
+            return False
+    return True
 
-    # Sort the characters in both strings and compare if they are equal
-    return sorted(string1) == sorted(string2)
+def sum_of_primes(start, end):
+    prime_sum = 0
+    for num in range(start, end + 1):
+        if is_prime(num):
+            prime_sum += num
+    return prime_sum
 
-# Test the function
-string1 = "listen"
-string2 = "silent"
-if is_anagram(string1, string2):
-    print(f"{string1} is an anagram of {string2}")
-else:
-    print(f"{string1} is not an anagram of {string2}")
+start_range = int(input("Enter the start of the range: "))
+end_range = int(input("Enter the end of the range: "))
+
+result = sum_of_primes(start_range, end_range)
+
+print(f"The sum of all prime numbers between {start_range} and {end_range} is: {result}")
