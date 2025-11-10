@@ -1,45 +1,20 @@
 
-import random
+def gcd(a, b):
+    while b:
+        a, b = b, a % b
+    return a
 
-def choose_word():
-    words = ['python', 'java', 'ruby', 'javascript', 'html', 'css']
-    return random.choice(words)
+def lcm(a, b):
+    return a * b // gcd(a, b)
 
-def display_word(word, guessed_letters):
-    display = ''
-    for letter in word:
-        if letter in guessed_letters:
-            display += letter
-        else:
-            display += '_'
-    return display
+def lcm_list(numbers):
+    if len(numbers) < 2:
+        return None
+    result = numbers[0]
+    for i in range(1, len(numbers)):
+        result = lcm(result, numbers[i])
+    return result
 
-def hangman():
-    word = choose_word()
-    guessed_letters = []
-    attempts = 6
-
-    print("Welcome to Hangman!")
-    print(display_word(word, guessed_letters))
-
-    while True:
-        guess = input("Guess a letter: ").lower()
-
-        if guess in guessed_letters:
-            print("You've already guessed that letter!")
-        elif guess in word:
-            guessed_letters.append(guess)
-            print(display_word(word, guessed_letters))
-        else:
-            attempts -= 1
-            print(f"Incorrect guess. You have {attempts} attempts left.")
-            print(display_word(word, guessed_letters))
-
-        if '_' not in display_word(word, guessed_letters):
-            print("Congratulations! You guessed the word correctly.")
-            break
-        if attempts == 0:
-            print(f"Sorry, you're out of attempts. The word was: {word}")
-            break
-
-hangman()
+numbers = [2, 3, 4, 5]
+result = lcm_list(numbers)
+print("The LCM of the numbers", numbers, "is:", result)
