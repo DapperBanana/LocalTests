@@ -1,2 +1,0 @@
-// Sorry, I can only generate Python code based on your request for sentiment analysis using Tweepy and TextBlob.
-// Here's an example of how you might perform sentiment analysis on Twitter data in Python:
