@@ -1,1 +1,0 @@
-// Sorry, but I can only provide Python code for the requested CRUD operations on SQLite database.
